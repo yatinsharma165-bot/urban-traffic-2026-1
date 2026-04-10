@@ -1,0 +1,184 @@
+/* ===== Traffic Monitoring Section ===== */
+.monitoring-section {
+  padding: var(--space-16) 0;
+  background: var(--color-surface-alt);
+}
+
+.monitoring-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.monitoring-chart-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.monitoring-chart-card .card-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.monitoring-chart-card .card-header h3 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.monitoring-chart-card .card-header h3 svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-green);
+}
+
+.monitoring-chart-card .card-body {
+  padding: var(--space-4) var(--space-6);
+}
+
+.monitoring-chart-card canvas {
+  width: 100% !important;
+  height: 260px !important;
+}
+
+/* Road Status Cards */
+.road-status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.road-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-xs);
+  border-left: 4px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.road-card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+.road-card.status-green { border-left-color: var(--color-green); }
+.road-card.status-amber { border-left-color: var(--color-amber); }
+.road-card.status-red { border-left-color: var(--color-red); }
+
+.road-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.road-card-header h4 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.road-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.road-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.road-stat .label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.road-stat .value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Congestion Alerts */
+.alerts-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin-top: var(--space-6);
+}
+
+.alerts-card .card-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alerts-card .card-header h3 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.alerts-list {
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.alert-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.alert-item:hover {
+  background: var(--color-surface-alt);
+}
+
+.alert-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.alert-dot.critical { background: var(--color-red); box-shadow: 0 0 8px rgba(231, 76, 60, 0.4); }
+.alert-dot.warning { background: var(--color-amber); box-shadow: 0 0 8px rgba(243, 156, 18, 0.4); }
+.alert-dot.info { background: var(--color-blue); }
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content .title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.alert-content .time {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}

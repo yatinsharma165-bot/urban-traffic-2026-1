@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Traffic Management System — AI-Powered Dashboard</title>
+  <meta name="description" content="Monitor live traffic, analyze congestion, and automatically optimize signal timing using vehicle count, speed, time, and location data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/monitoring.css">
+  <link rel="stylesheet" href="css/signals.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="nav-logo-text">Traffic<span>AI</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#dashboard" class="active">Dashboard</a>
+        <a href="#monitoring">Monitoring</a>
+        <a href="#signals">Signals</a>
+        <a href="#data">Data</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <div class="nav-status">
+          <span class="live-dot"></span>
+          Live
+        </div>
+        <a href="login.html" class="btn btn-secondary" style="padding: 6px 16px; font-size: 13px;">Logout</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="dashboard">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg>
+          AI-Powered Traffic Intelligence
+        </div>
+        <h1>Smarter Signals.<br><span class="highlight">Faster Roads.</span><br>Better Cities.</h1>
+        <p>Monitor live traffic, analyze congestion, and automatically optimize signal timing using vehicle count, speed, time, and location data.</p>
+        <div class="hero-actions">
+          <a href="#monitoring" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            Live Monitoring
+          </a>
+          <a href="#about" class="btn btn-secondary btn-lg">
+            Learn More
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS CARDS ===== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 22 3 22 16 16 11"/></svg>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-vehicles">0</h3>
+            <p>Total Vehicles</p>
+            <span class="stat-change up">↑ Live tracking</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-speed">0 km/h</h3>
+            <p>Average Speed</p>
+            <span class="stat-change up">↑ Realtime</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-congestion" class="stat-value">Low</h3>
+            <p>Congestion Level</p>
+            <span class="stat-change down">AI optimized</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon red">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-info">
+            <h3 id="stat-intersections">0</h3>
+            <p>Active Intersections</p>
+            <span class="stat-change up">↑ Monitored</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAP + SIGNAL PANEL ===== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="dashboard-row">
+        <!-- Live Map -->
+        <div class="map-card">
+          <div class="map-card-header">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              Live Traffic Map
+            </h3>
+            <span style="font-size: 12px; color: var(--color-text-muted);">
+              Last update: <span id="last-update">--:--:--</span>
+            </span>
+          </div>
+          <div id="traffic-map"></div>
+        </div>
+
+        <!-- Signal Status -->
+        <div class="signal-panel">
+          <div class="signal-panel-header">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Signal Control Status
+            </h3>
+          </div>
+          <div class="signal-list" id="signal-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AI RECOMMENDATIONS ===== -->
+  <section class="recommendations-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 12 18.469c-1.006 0-1.868-.384-2.988-1.282l-.548-.547z"/></svg>
+          AI Insights
+        </span>
+        <h2>Intelligent Recommendations</h2>
+        <p>Real-time AI analysis provides actionable insights for traffic optimization</p>
+      </div>
+      <div class="recommendations-grid" id="recommendations-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRAFFIC MONITORING ===== -->
+  <section class="monitoring-section" id="monitoring">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Live Analytics
+        </span>
+        <h2>Traffic Monitoring</h2>
+        <p>Road-wise traffic analysis with real-time speed trends and congestion alerts</p>
+      </div>
+
+      <!-- Charts -->
+      <div class="monitoring-grid">
+        <div class="monitoring-chart-card">
+          <div class="card-header">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Speed Trends
+            </h3>
+            <span class="status-badge green">Live</span>
+          </div>
+          <div class="card-body">
+            <canvas id="speedChart"></canvas>
+          </div>
+        </div>
+
+        <div class="monitoring-chart-card">
+          <div class="card-header">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              Vehicle Count by Time
+            </h3>
+            <span class="status-badge green">Live</span>
+          </div>
+          <div class="card-body">
+            <canvas id="densityChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Road Status Cards -->
+      <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        Road Status Overview
+      </h3>
+      <div class="road-status-grid" id="road-status-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Alerts -->
+      <div class="alerts-card" style="margin-top: 24px;">
+        <div class="card-header">
+          <h3>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-red)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Congestion Alerts
+          </h3>
+        </div>
+        <div class="alerts-list" id="alerts-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SMART SIGNAL CONTROL ===== -->
+  <section class="signals-section section" id="signals">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          Adaptive Control
+        </span>
+        <h2>Smart Signal Control</h2>
+        <p>AI dynamically adjusts signal timing based on real-time traffic density and vehicle flow</p>
+      </div>
+
+      <!-- Adaptive Logic Cards -->
+      <div class="signals-logic-grid">
+        <div class="logic-card">
+          <div class="logic-icon" style="background: var(--color-red-light);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-red)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Heavy Traffic → Longer Green</h4>
+          <p>When vehicle density exceeds 70%, green signal time automatically extends up to 90 seconds to clear congestion.</p>
+        </div>
+
+        <div class="logic-card">
+          <div class="logic-icon" style="background: var(--color-green-light);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Low Traffic → Shorter Green</h4>
+          <p>When traffic is low (under 30% density), green time reduces to 30 seconds — preventing unnecessary wait on other roads.</p>
+        </div>
+
+        <div class="logic-card">
+          <div class="logic-icon" style="background: var(--color-blue-light);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-blue)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4>AI Cross-Road Optimization</h4>
+          <p>The AI compares traffic across all connected intersections and adjusts signals to create green corridors for maximum throughput.</p>
+        </div>
+      </div>
+
+      <!-- Live Traffic Lights -->
+      <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; text-align: center;">
+        🚦 Live Signal Status
+      </h3>
+      <div class="traffic-light-section" id="traffic-lights">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Before/After Comparison -->
+      <div class="section-header" style="margin-top: 32px;">
+        <h2>Efficiency Comparison</h2>
+        <p>Traditional traffic systems vs AI-powered adaptive signal control</p>
+      </div>
+      <div class="metrics-comparison">
+        <div class="metrics-card" id="metrics-before">
+          <!-- Populated by JS -->
+        </div>
+        <div class="metrics-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <span class="improvement" id="improvement-value">--% Better</span>
+        </div>
+        <div class="metrics-card" id="metrics-after">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DATA TABLE ===== -->
+  <section class="table-section" id="data">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Traffic Database
+        </span>
+        <h2>Traffic Data Table</h2>
+        <p>Complete real-time traffic data for all monitored intersections</p>
+      </div>
+
+      <div class="table-container">
+        <div class="table-toolbar">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            Intersection Data
+          </h3>
+          <div class="table-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="table-search" placeholder="Search roads...">
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Road / Junction</th>
+                <th>Location</th>
+                <th>Vehicles</th>
+                <th>Avg Speed</th>
+                <th>Time Slot</th>
+                <th>Traffic Level</th>
+                <th>Green Duration</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span>Showing 8 intersections • Updated every 3 seconds</span>
+          <span id="table-timestamp"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <span class="badge" style="margin-bottom: 16px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            The Problem & Solution
+          </span>
+          <h2>Why Smart Traffic Management Matters</h2>
+          <p>Urban populations are growing rapidly, but road infrastructure can't expand fast enough. Traditional traffic signals operate on fixed timers — they can't react to actual traffic conditions.</p>
+          <p>Our AI-powered system collects real-time data on vehicle count, speed, and density at each intersection. It then dynamically adjusts green signal duration to reduce waiting time, congestion, and fuel waste.</p>
+
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="about-feature-icon" style="background: var(--color-green-light);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-green-dark)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>Real-Time Data Collection</h4>
+                <p>Vehicle count, speed, and location tracked continuously at every intersection</p>
+              </div>
+            </div>
+
+            <div class="about-feature">
+              <div class="about-feature-icon" style="background: var(--color-blue-light);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-blue-dark)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>AI-Powered Analysis</h4>
+                <p>Machine learning models predict congestion and recommend optimal signal timing</p>
+              </div>
+            </div>
+
+            <div class="about-feature">
+              <div class="about-feature-icon" style="background: var(--color-amber-light);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-amber-dark)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>Adaptive Signal Control</h4>
+                <p>Signals automatically adjust in real-time — no manual intervention needed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-visual">
+          <div class="about-stat-card">
+            <div class="number green">40%</div>
+            <div class="label">Reduction in wait time</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="number blue">1,200+</div>
+            <div class="label">Vehicles/hr throughput</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="number amber">25%</div>
+            <div class="label">Less fuel consumption</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="number red">60%</div>
+            <div class="label">Fewer congestion alerts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / FOOTER ===== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Get in Touch
+        </span>
+        <h2>Contact Us</h2>
+        <p>Have questions about the Smart Traffic Management System? Reach out to our team</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Let's Build Smarter Cities Together</h2>
+          <p>Whether you're a city administrator, researcher, or traffic operator — we'd love to hear from you. Our system is designed to integrate with existing infrastructure.</p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <span>contact@smarttraffic.ai</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <span>+91 98765 43210</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <span>Smart City Hub, Bengaluru, India</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <form id="contactForm" class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Doe">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell us about your traffic management needs..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="nav-logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <span class="nav-logo-text">Traffic<span style="color: var(--color-green);">AI</span></span>
+          </div>
+          <p>AI-Powered Smart Traffic Management for Congested Urban Roads. Building smarter, faster, and cleaner cities.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+            <a href="#" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#monitoring">Monitoring</a></li>
+            <li><a href="#signals">Signal Control</a></li>
+            <li><a href="#data">Data Analytics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Research Papers</a></li>
+            <li><a href="#">Case Studies</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 TrafficAI. Smart Traffic Management System. All rights reserved.</p>
+        <p>Built with ❤️ for smarter cities</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/trafficEngine.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/monitoring.js"></script>
+  <script src="js/signals.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

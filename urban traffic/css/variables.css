@@ -1,0 +1,98 @@
+/* ===== Design Tokens ===== */
+:root {
+  /* Primary Colors */
+  --color-bg: #FAFBFC;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F4F6F8;
+  --color-border: #E2E8F0;
+  --color-border-light: #EDF2F7;
+
+  /* Text */
+  --color-text-primary: #1A202C;
+  --color-text-secondary: #4A5568;
+  --color-text-muted: #A0AEC0;
+  --color-text-inverse: #FFFFFF;
+
+  /* Accent Colors */
+  --color-green: #2ECC71;
+  --color-green-light: rgba(46, 204, 113, 0.12);
+  --color-green-dark: #27AE60;
+
+  --color-red: #E74C3C;
+  --color-red-light: rgba(231, 76, 60, 0.12);
+  --color-red-dark: #C0392B;
+
+  --color-amber: #F39C12;
+  --color-amber-light: rgba(243, 156, 18, 0.12);
+  --color-amber-dark: #E67E22;
+
+  --color-blue: #3498DB;
+  --color-blue-light: rgba(52, 152, 219, 0.12);
+  --color-blue-dark: #2980B9;
+
+  --color-purple: #9B59B6;
+  --color-purple-light: rgba(155, 89, 182, 0.12);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1A202C 0%, #2D3748 100%);
+  --gradient-accent: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+  --gradient-hero: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Borders & Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Layout */
+  --container-max: 1280px;
+  --nav-height: 72px;
+}

@@ -1,0 +1,200 @@
+/* ===== Smart Signal Control Section ===== */
+.signals-section {
+  padding: var(--space-16) 0;
+}
+
+.signals-logic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.logic-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.logic-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.logic-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-4);
+}
+
+.logic-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.logic-card h4 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.logic-card p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Traffic Light Simulation */
+.traffic-light-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.traffic-light-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.traffic-light-visual {
+  width: 60px;
+  height: 140px;
+  background: #1A202C;
+  border-radius: var(--radius-lg);
+  margin: 0 auto var(--space-4);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.light-bulb {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: #2D3748;
+  transition: all 0.5s ease;
+}
+
+.light-bulb.red-on {
+  background: var(--color-red);
+  box-shadow: 0 0 16px rgba(231, 76, 60, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.light-bulb.amber-on {
+  background: var(--color-amber);
+  box-shadow: 0 0 16px rgba(243, 156, 18, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.light-bulb.green-on {
+  background: var(--color-green);
+  box-shadow: 0 0 16px rgba(46, 204, 113, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.traffic-light-card .road-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.traffic-light-card .signal-status {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.traffic-light-card .timer {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.traffic-light-card .timer.green { color: var(--color-green-dark); }
+.traffic-light-card .timer.red { color: var(--color-red-dark); }
+.traffic-light-card .timer.amber { color: var(--color-amber-dark); }
+
+/* Before/After Metrics */
+.metrics-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.metrics-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-card);
+}
+
+.metrics-card h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.metrics-card .metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.metrics-card .metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.metric-value {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.metrics-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.metrics-arrow svg {
+  width: 40px;
+  height: 40px;
+  color: var(--color-green);
+}
+
+.metrics-arrow .improvement {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-green-dark);
+  background: var(--color-green-light);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-xl);
+}

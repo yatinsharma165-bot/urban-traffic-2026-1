@@ -1,0 +1,103 @@
+/* ===== Responsive Design ===== */
+
+/* Large Desktop */
+@media (max-width: 1200px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .traffic-light-section { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  :root {
+    --font-size-5xl: 2.25rem;
+    --font-size-4xl: 1.875rem;
+    --font-size-3xl: 1.5rem;
+  }
+
+  .dashboard-row { grid-template-columns: 1fr; }
+  .monitoring-grid { grid-template-columns: 1fr; }
+  .road-status-grid { grid-template-columns: repeat(2, 1fr); }
+  .signals-logic-grid { grid-template-columns: 1fr; }
+  .recommendations-grid { grid-template-columns: 1fr; }
+  .metrics-comparison { grid-template-columns: 1fr; gap: var(--space-4); }
+  .metrics-arrow { transform: rotate(90deg); }
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .nav-links.mobile-open {
+    display: flex;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-lg);
+    animation: fadeIn 0.2s ease;
+  }
+
+  .nav-links.mobile-open a {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    width: 100%;
+  }
+}
+
+/* Small Tablet / Large Phone */
+@media (max-width: 768px) {
+  .section { padding: var(--space-12) 0; }
+  .container { padding: 0 var(--space-4); }
+
+  .hero { padding: calc(var(--nav-height) + var(--space-12)) 0 var(--space-12); }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .road-status-grid { grid-template-columns: 1fr; }
+  .traffic-light-section { grid-template-columns: 1fr 1fr; }
+
+  .login-page { flex-direction: column; }
+  .login-brand { display: none; }
+  .login-form-panel { padding: var(--space-6); }
+
+  .about-visual { grid-template-columns: 1fr 1fr; }
+
+  .contact-form .form-row { grid-template-columns: 1fr; }
+
+  .table-toolbar { flex-direction: column; align-items: flex-start; }
+  .table-search input { width: 100%; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .footer-bottom { flex-direction: column; gap: var(--space-3); text-align: center; }
+
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; }
+
+  #traffic-map { height: 300px; }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  :root {
+    --font-size-5xl: 1.875rem;
+    --font-size-4xl: 1.5rem;
+    --font-size-3xl: 1.25rem;
+    --nav-height: 64px;
+  }
+
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: var(--space-4); }
+
+  .traffic-light-section { grid-template-columns: 1fr; }
+  .about-visual { grid-template-columns: 1fr; }
+
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-status { display: none; }
+}
